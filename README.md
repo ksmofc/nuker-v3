@@ -16,4 +16,4 @@
 **Este projeto deve ser utilizado apenas para fins educacionais,** **testes autorizados ou ambientes próprios.**
 **O uso indevido pode violar termos de serviço de plataformas e leis**
 
-*© 2026 KSM TEAM — All Rights Reserved.*
+*© 2026 HEX ALLIANCE — All Rights Reserved.*
