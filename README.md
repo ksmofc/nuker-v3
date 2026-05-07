@@ -1,8 +1,8 @@
-# ksxz-nuke
+# ksxz and hxzz-nuke
 
-*ksxz nuker v1*
+*nuker v1*
 
-**NUKER FEITO POR KSXZ**
+**NUKER FEITO POR KSXZ and HXZZ**
 
 **FEITO PARA DEMONSTRAÇÃO, USE POR SUA CONTA E RISCO**
 
