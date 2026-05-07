@@ -7,11 +7,11 @@
 **FEITO PARA DEMONSTRAÇÃO, USE POR SUA CONTA E RISCO**
 
 **Support Discord Server**
-*https://discord.gg/UJYbUSJz6e*
+*https://discord.gg/SWEYhcXjPr*
 
-**KSM TEAM OWNER**
+**KSXZ AND HXZZ**
 
-# ⚠️ Disclaimer
+# Disclaimer
 
 **Este projeto deve ser utilizado apenas para fins educacionais,** **testes autorizados ou ambientes próprios.**
 **O uso indevido pode violar termos de serviço de plataformas e leis**
