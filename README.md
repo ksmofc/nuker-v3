@@ -1,4 +1,4 @@
-# ksxz and hxzz-nuke
+# ksxz and hxzz -nuke
 
 *nuker v1*
 
