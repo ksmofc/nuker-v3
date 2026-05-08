@@ -1,6 +1,6 @@
 # ksxz and hxzz -nuke
 
-*nuker v1*
+*nuker v3*
 
 **NUKER FEITO POR KSXZ and HXZZ**
 
