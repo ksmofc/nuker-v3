@@ -341,8 +341,8 @@ def menu():
     gradiente = Colors.red
 
     # Título e menu centralizados e coloridos
-    print(Colorate.Vertical(gradiente, ascii))
-    print(Colorate.Vertical(gradiente, ascii2))
+    print(Colorate.Horizontal(gradiente, ascii))
+    print(Colorate.Horizontal(gradiente, ascii2))
     print()
 
     # Input do usuário
