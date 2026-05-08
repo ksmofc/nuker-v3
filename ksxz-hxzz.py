@@ -47,22 +47,22 @@ def get_valid_token():
         while True:
                 tkn=input(f"[ + ]     Token: ")
                 headers={'Authorization':f"Bot {tkn}"}
-                Write.Print(f"[ + ]     Checking token.\n",Colors.blue,interval=.005)
+                Write.Print(f"[ + ]     Checking token.\n",Colors.white,interval=.005)
                 response=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
                 if response.status_code==200:
-                        Write.Print(f"[ + ]     Token valid.\n",Colors.blue,interval=.005)
+                        Write.Print(f"[ + ]     Token valid.\n",Colors.white,interval=.005)
                         return tkn
                 else:
-                        Write.Print(f"[ + ]     Please enter a valid token.\n",Colors.blue,interval=.005)
+                        Write.Print(f"[ + ]     Please enter a valid token.\n",Colors.white,interval=.005)
 
 def get_valid_guild(prompt,is_valid):
         while True:
                 user_input=input(prompt)
-                Write.Print(f"[ + ]     Checking guild.\n",Colors.blue,interval=.005)
+                Write.Print(f"[ + ]     Checking guild.\n",Colors.white,interval=.005)
                 if len(user_input)>10 and is_valid(user_input):
                         return user_input
                 else:
-                        Write.Print(f"[ + ]     Please enter a valid guild id.\n",Colors.blue,interval=.005)
+                        Write.Print(f"[ + ]     Please enter a valid guild id.\n",Colors.white,interval=.005)
 
 def is_valid_guild_id(guild_id):
         headers={'Authorization':f"Bot {tkn}"}
@@ -279,8 +279,8 @@ def deleteroles():
         global tkn
         global svr
         delete_all_roles(tkn,svr)
-        print(f"{Fore.BLUE}[ + ]     All roles deleted.")
-        input(f"{Fore.BLUE}[ + ]     Press enter to go back...{Fore.RESET}")
+        print(f"{Fore.RED}[ + ]     All roles deleted.")
+        input(f"{Fore.WHITE}[ + ]     Press enter to go back...{Fore.RESET}")
 
 
 # ============================
@@ -382,7 +382,7 @@ def menu():
     global svr
     clear()  # limpa a tela
 
-    gradiente = Colors.purple_to_blue
+    gradiente = Colors.red_to_black
 
     # Título e menu centralizados e coloridos
     print(Colorate.Vertical(gradiente, ascii))
@@ -390,58 +390,58 @@ def menu():
     print()
 
     # Input do usuário
-    opcao = input(f"{Fore.BLUE}[ + ]     Escolha uma opção: {Fore.RESET}")
+    opcao = input(f"{Fore.WHITE}[ + ]     Escolha uma opção: {Fore.RESET}")
 
     if opcao == "1":
         spam()
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "2":
         channelcreate()
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "3":
         channeldelete()
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "4":
         createroles()
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "5":
         deleteroles()
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "6":
         ban_all(svr, tkn)
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "7":
         mensagem = input(f"{Fore.RED}[ + ]     Digite a mensagem para enviar: ")
         dm_all_users(tkn, svr, mensagem)
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "8":
         channeldelete()
         channelcreate()
         spam()
-        input(f"{Fore.BLUE}[ + ]     Ação concluída. Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Ação concluída. Pressione Enter para voltar...")
         menu()
 
     elif opcao == "9":
-        print(f"{Fore.GREEN}[ + ]     Saindo... Até mais!")
+        print(f"{Fore.WHITE}[ + ]     Saindo... Até mais!")
         exit()  # encerra o script
 
     else:
         print(f"{Fore.RED}[ ! ]     Opção inválida.")
-        input(f"{Fore.BLUE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
 
@@ -454,7 +454,7 @@ clear()
 tkn = get_valid_token()
 svr = get_valid_guild("[ + ]     ID do servidor: ", is_valid_guild_id)
 
-Write.Print(f"[ + ]     Servidor válido.\n", Colors.blue, interval=0.005)
+Write.Print(f"[ + ]     Servidor válido.\n", Colors.white, interval=0.005)
 
 clear()
 menu()
