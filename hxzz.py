@@ -5,14 +5,13 @@ import requests
 import os
 import random
 import colorama
-from colorama import Fore,Back,Style
+from colorama import Fore,Back,Style,init
 import asyncio
-import json
-from pystyle import*
 import logging
 import datetime
 from threading import Thread
 import queue
+from pystyle import Colors, Colorate, Center, Write
 
 global msg
 msg=0
@@ -24,8 +23,8 @@ global err
 err=0
 
 def print_message(action,success=True,response_code=None):
-        if success:status=f"{Fore.RED}[ ~ ]"
-        else:status=f"{Fore.RED}[ ! ]"
+        if success:status=f"{Fore.white}[ ~ ]"
+        else:status=f"{Fore.red}[ ! ]"
         if response_code is not None:status+=f" Response Code: {response_code}"
         print(f"{status}     {action}")
 
@@ -68,7 +67,7 @@ def is_valid_guild_id(guild_id):
         headers={'Authorization':f"Bot {tkn}"}
         response=requests.get(f"https://discord.com/api/v9/guilds/{guild_id}",headers=headers)
         return response.status_code==200
-        Write.Print(f"[ + ]     Guild valid.\n",Colors.red,interval=.005)
+        Write.Print(f"[ + ]     Guild valid.\n",Colors.white,interval=.005)
 
 def get_integer_input(prompt):
         while True:
@@ -76,7 +75,7 @@ def get_integer_input(prompt):
                         user_input=int(input(prompt))
                         return user_input
                 except ValueError:
-                        Write.Print(f"[ + ]     Please enter a valid integer.\n",Colors.red,interval=.005)
+                        Write.Print(f"[ + ]     Please enter a valid integer.\n",Colors.white,interval=.005)
 
 def send_message_to_channel(bottoken,channel_id,message,amount):
         channel_url=f"https://discord.com/api/channels/{channel_id}/messages"
@@ -99,11 +98,11 @@ def send_messages_to_all_channels(bottoken,guild_id,message,amount,num_threads=5
 def spam():
         global tkn
         global svr
-        message=input(f"{Fore.RED}[ + ]     Enter the message to send: {Fore.RESET}")
-        amount=get_integer_input(f"{Fore.RED}[ + ]     Enter the number of messages to send: {Fore.RESET}")
+        message=input(f"{Fore.white}[ + ]     Enter the message to send: {Fore.RESET}")
+        amount=get_integer_input(f"{Fore.white}[ + ]     Enter the number of messages to send: {Fore.RESET}")
         num_threads=20
         send_messages_to_all_channels(tkn,svr,message,amount,num_threads)
-        input(f"{Fore.RED}[ + ]     Complete. Press enter to go back.")
+        input(f"{Fore.white}[ + ]     Complete. Press enter to go back.")
         menu()
 
 def delete_channel(channel_id,token,result_queue,max_retries=5):
@@ -153,8 +152,8 @@ def create_channel(guild_id,token,channel_name,result_queue):
 def channelcreate():
         global tkn
         global svr
-        channel_name=input(f"{Fore.WHITE}[ + ]     Enter the channel name: ")
-        num_channels=get_integer_input(f"{Fore.RED}[ + ]     Enter the number of channels to create: ")
+        channel_name=input(f"{Fore.white}[ + ]     Enter the channel name: ")
+        num_channels=get_integer_input(f"{Fore.white}[ + ]     Enter the number of channels to create: ")
         num_threads=150
         result_queue=queue.Queue()
         threads=[]
@@ -174,13 +173,12 @@ def create_role(guild_id,token,role_name,role_color,result_queue):
         if response.status_code==200:
                 print_message(f"Role '{role_name}' created successfully.")
         else:
-                print(f"{Fore.RED}[ + ]     Error creating role '{role_name}': {response.status_code}")
-
+                        print(f"{Fore.white}[ + ]     Error creating role '{role_name}': {response.status_code}")
 def createroles():
         global tkn
         global svr
-        name=input(f"{Fore.RED}[ + ]     Role name: ")
-        num_roles=get_integer_input(f"{Fore.WHITE}[ + ]     Enter the number of roles to create: ")
+        name=input(f"{Fore.white}[ + ]     Role name: ")
+        num_roles=get_integer_input(f"{Fore.white}[ + ]     Enter the number of roles to create: ")
         num_threads=100
         result_queue=queue.Queue()
         threads=[]
@@ -201,7 +199,7 @@ def delete_role(role_id,guild_id,token,result_queue):
         if response.status_code==204:
                 print_message(f"Role {role_id} deleted successfully.")
         else:
-                print(f"{Fore.WHITE}Error deleting role {role_id}: {response.status_code}")
+                print(f"{Fore.white}Error deleting role {role_id}: {response.status_code}")
 
 def delete_all_roles(token,guild_id,num_threads=100):
         headers={'Authorization':f"Bot {token}"}
@@ -279,49 +277,17 @@ def deleteroles():
         global tkn
         global svr
         delete_all_roles(tkn,svr)
-        print(f"{Fore.RED}[ + ]     All roles deleted.")
-        input(f"{Fore.WHITE}[ + ]     Press enter to go back...{Fore.RESET}")
+        print(f"{Fore.white}[ + ]     All roles deleted.")
+        input(f"{Fore.white}[ + ]     Press enter to go back...{Fore.RESET}")
 
 
 # ============================
-#   PAINEL NOVO (ROXO ESCURO)
+#   PAINEL NOVO (VERMELHO)
 # ============================
 
 def center_ascii(text):
     return "\n".join([Center.XCenter(line) for line in text.splitlines()])
 
-ascii = center_ascii("""
- █████   ████  █████████  █████ █████ ███████████                  █████   █████ █████ █████ ███████████ ███████████
-▒▒███   ███▒  ███▒▒▒▒▒███▒▒███ ▒▒███ ▒█▒▒▒▒▒▒███                  ▒▒███   ▒▒███ ▒▒███ ▒▒███ ▒█▒▒▒▒▒▒███ ▒█▒▒▒▒▒▒███ 
- ▒███  ███   ▒███    ▒▒▒  ▒▒███ ███  ▒     ███▒                    ▒███    ▒███  ▒▒███ ███  ▒     ███▒  ▒     ███▒  
- ▒███████    ▒▒█████████   ▒▒█████        ███        ██████████    ▒███████████   ▒▒█████        ███         ███    
- ▒███▒▒███    ▒▒▒▒▒▒▒▒███   ███▒███      ███        ▒▒▒▒▒▒▒▒▒▒     ▒███▒▒▒▒▒███    ███▒███      ███         ███     
- ▒███ ▒▒███   ███    ▒███  ███ ▒▒███   ████     █                  ▒███    ▒███   ███ ▒▒███   ████     █  ████     █
- █████ ▒▒████▒▒█████████  █████ █████ ███████████                  █████   █████ █████ █████ ███████████ ███████████
-▒▒▒▒▒   ▒▒▒▒  ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒                  ▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒▒ 
-[  ksxz and hxzz • Painel Nuker lmao ]
-""")
-
-ascii2 = center_ascii("""
-╔═════════════════════╦═════════════════════╦═════════════════════╗
-║ [ 1 ] Enviar spam   ║ [ 2 ] Criar canais  ║ [ 3 ] Deletar canal ║
-╠═════════════════════╬═════════════════════╬═════════════════════╣
-║ [ 4 ] Criar cargos  ║ [ 5 ] Deletar cargos║ [ 6 ] Banir membros ║
-╠═════════════════════╬═════════════════════╬═════════════════════╣
-║ [ 7 ] Enviar DM     ║ [ 8 ] Nuke completo ║ [ 9 ] Sair          ║
-╚═════════════════════╩═════════════════════╩═════════════════════╝
-""")
-
-from pystyle import Colors, Colorate, Center
-from colorama import Fore, init
-
-init(autoreset=True)
-
-# Função para centralizar ASCII
-def center_ascii(text):
-    return "\n".join([Center.XCenter(line) for line in text.splitlines()])
-
-# ASCII do título
 ascii = center_ascii("""
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠉⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢦⣤⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -352,10 +318,9 @@ ascii = center_ascii("""
 ⣿⣿⣟⠂⠀⢤⣤⣀⡉⠟⠛⢢⣼⢷⣶⣿⣬⣥⣈⣉⣋⡋⣛⣛⡋⠛⢛⣛⣛⢋⣛⣉⣩⣍⣥⣴⣶⡶⣾⡿⠿⠿⠁⠀⠙⠛⣋⣁⣀⣀⠀⢤⣤⡈⡿⣿⣿
 ⣿⣿⠂⢠⣄⠌⠋⢻⡛⠒⣈⣿⣦⣦⣯⣉⣹⡟⠻⣷⣶⣿⣉⣽⣟⣫⣿⣏⣋⣿⣅⣬⣽⣏⣁⣽⣥⡄⣸⣷⣶⣎⡻⡿⠿⠓⢦⡙⠙⠉⣀⢀⣈⠀⠘⡻⣿
 ⣯⣶⣤⣶⣤⣼⣷⣴⣿⣿⣶⣴⣾⣧⣴⣿⣥⣾⣿⣯⣤⣼⣿⣴⣾⣯⣽⣯⣽⣧⣾⣿⣴⣼⣯⣤⣬⣧⣤⣴⣧⣤⣴⣷⣶⣿⣿⣿⣦⣴⣶⣤⣤⣤⣤⣾⣽
-[  ksxz and hxzz • Painel Nuker lmao  ]
+[  ksxz and hxzz • Painel Nuker lmao ]
 """)
 
-# ASCII do menu
 ascii2 = center_ascii("""
 ╔═════════════════════╦═════════════════════╦═════════════════════╗
 ║ [ 1 ] Enviar spam   ║ [ 2 ] Criar canais  ║ [ 3 ] Deletar canal ║
@@ -365,6 +330,8 @@ ascii2 = center_ascii("""
 ║ [ 7 ] Enviar DM     ║ [ 8 ] Nuke completo ║ [ 9 ] Sair          ║
 ╚═════════════════════╩═════════════════════╩═════════════════════╝
 """)
+
+init(autoreset=True)
 
 def menu():
     global tkn
@@ -379,58 +346,58 @@ def menu():
     print()
 
     # Input do usuário
-    opcao = input(f"{Fore.WHITE}[ + ]     Escolha uma opção: {Fore.RESET}")
+    opcao = input(f"{Fore.white}[ + ]     Escolha uma opção: {Fore.RESET}")
 
     if opcao == "1":
         spam()
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "2":
         channelcreate()
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "3":
         channeldelete()
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "4":
         createroles()
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "5":
         deleteroles()
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "6":
         ban_all(svr, tkn)
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "7":
-        mensagem = input(f"{Fore.RED}[ + ]     Digite a mensagem para enviar: ")
+        mensagem = input(f"{Fore.white}[ + ]     Digite a mensagem para enviar: ")
         dm_all_users(tkn, svr, mensagem)
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "8":
         channeldelete()
         channelcreate()
         spam()
-        input(f"{Fore.WHITE}[ + ]     Ação concluída. Pressione Enter para voltar...")
+        input(f"{Fore.white}[ + ]     Ação concluída. Pressione Enter para voltar...")
         menu()
 
     elif opcao == "9":
-        print(f"{Fore.WHITE}[ + ]     Saindo... Até mais!")
+        print(f"{Fore.white}[ + ]     Saindo... Até mais!")
         exit()  # encerra o script
 
     else:
-        print(f"{Fore.RED}[ ! ]     Opção inválida.")
-        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
+        print(f"{Fore.white}[ ! ]     Opção inválida.")
+        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
         menu()
 
 
