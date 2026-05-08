@@ -338,11 +338,9 @@ def menu():
     global svr
     clear()  # limpa a tela
 
-    gradiente = Colors.red
-
     # Título e menu centralizados e coloridos
-    print(Colorate.Horizontal(gradiente, ascii))
-    print(Colorate.Horizontal(gradiente, ascii2))
+    print(Colorate.Horizontal(Colors.red, ascii))
+    print(Colorate.Vertical(Colors.white, ascii2))
     print()
 
     # Input do usuário
@@ -388,16 +386,16 @@ def menu():
         channeldelete()
         channelcreate()
         spam()
-        input(f"{Fore.white}[ + ]     Ação concluída. Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Ação concluída. Pressione Enter para voltar...")
         menu()
 
     elif opcao == "9":
-        print(f"{Fore.white}[ + ]     Saindo... Até mais!")
+        print(f"{Fore.WHITE}[ + ]     Saindo... Até mais!")
         exit()  # encerra o script
 
     else:
-        print(f"{Fore.white}[ ! ]     Opção inválida.")
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        print(f"{Fore.WHITE}[ ! ]     Opção inválida.")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
 
