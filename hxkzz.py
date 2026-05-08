@@ -23,7 +23,7 @@ global err
 err=0
 
 def print_message(action,success=True,response_code=None):
-        if success:status=f"{Fore.white}[ ~ ]"
+        if success:status=f"{Fore.WHITE}[ ~ ]"
         else:status=f"{Fore.red}[ ! ]"
         if response_code is not None:status+=f" Response Code: {response_code}"
         print(f"{status}     {action}")
@@ -98,11 +98,11 @@ def send_messages_to_all_channels(bottoken,guild_id,message,amount,num_threads=5
 def spam():
         global tkn
         global svr
-        message=input(f"{Fore.white}[ + ]     Enter the message to send: {Fore.RESET}")
-        amount=get_integer_input(f"{Fore.white}[ + ]     Enter the number of messages to send: {Fore.RESET}")
+        message=input(f"{Fore.WHITE}[ + ]     Enter the message to send: {Fore.RESET}")
+        amount=get_integer_input(f"{Fore.WHITE}[ + ]     Enter the number of messages to send: {Fore.RESET}")
         num_threads=20
         send_messages_to_all_channels(tkn,svr,message,amount,num_threads)
-        input(f"{Fore.white}[ + ]     Complete. Press enter to go back.")
+        input(f"{Fore.WHITE}[ + ]     Complete. Press enter to go back.")
         menu()
 
 def delete_channel(channel_id,token,result_queue,max_retries=5):
@@ -152,8 +152,8 @@ def create_channel(guild_id,token,channel_name,result_queue):
 def channelcreate():
         global tkn
         global svr
-        channel_name=input(f"{Fore.white}[ + ]     Enter the channel name: ")
-        num_channels=get_integer_input(f"{Fore.white}[ + ]     Enter the number of channels to create: ")
+        channel_name=input(f"{Fore.WHITE}[ + ]     Enter the channel name: ")
+        num_channels=get_integer_input(f"{Fore.WHITE}[ + ]     Enter the number of channels to create: ")
         num_threads=150
         result_queue=queue.Queue()
         threads=[]
@@ -173,12 +173,12 @@ def create_role(guild_id,token,role_name,role_color,result_queue):
         if response.status_code==200:
                 print_message(f"Role '{role_name}' created successfully.")
         else:
-                        print(f"{Fore.white}[ + ]     Error creating role '{role_name}': {response.status_code}")
+                        print(f"{Fore.WHITE}[ + ]     Error creating role '{role_name}': {response.status_code}")
 def createroles():
         global tkn
         global svr
-        name=input(f"{Fore.white}[ + ]     Role name: ")
-        num_roles=get_integer_input(f"{Fore.white}[ + ]     Enter the number of roles to create: ")
+        name=input(f"{Fore.WHITE}[ + ]     Role name: ")
+        num_roles=get_integer_input(f"{Fore.WHITE}[ + ]     Enter the number of roles to create: ")
         num_threads=100
         result_queue=queue.Queue()
         threads=[]
@@ -199,7 +199,7 @@ def delete_role(role_id,guild_id,token,result_queue):
         if response.status_code==204:
                 print_message(f"Role {role_id} deleted successfully.")
         else:
-                print(f"{Fore.white}Error deleting role {role_id}: {response.status_code}")
+                print(f"{Fore.WHITE}Error deleting role {role_id}: {response.status_code}")
 
 def delete_all_roles(token,guild_id,num_threads=100):
         headers={'Authorization':f"Bot {token}"}
@@ -277,8 +277,8 @@ def deleteroles():
         global tkn
         global svr
         delete_all_roles(tkn,svr)
-        print(f"{Fore.white}[ + ]     All roles deleted.")
-        input(f"{Fore.white}[ + ]     Press enter to go back...{Fore.RESET}")
+        print(f"{Fore.WHITE}[ + ]     All roles deleted.")
+        input(f"{Fore.WHITE}[ + ]     Press enter to go back...{Fore.RESET}")
 
 
 # ============================
@@ -346,42 +346,42 @@ def menu():
     print()
 
     # Input do usuário
-    opcao = input(f"{Fore.white}[ + ]     Escolha uma opção: {Fore.RESET}")
+    opcao = input(f"{Fore.WHITE}[ + ]     Escolha uma opção: {Fore.RESET}")
 
     if opcao == "1":
         spam()
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "2":
         channelcreate()
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "3":
         channeldelete()
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "4":
         createroles()
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "5":
         deleteroles()
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "6":
         ban_all(svr, tkn)
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "7":
-        mensagem = input(f"{Fore.white}[ + ]     Digite a mensagem para enviar: ")
+        mensagem = input(f"{Fore.WHITE}[ + ]     Digite a mensagem para enviar: ")
         dm_all_users(tkn, svr, mensagem)
-        input(f"{Fore.white}[ + ]     Pressione Enter para voltar...")
+        input(f"{Fore.WHITE}[ + ]     Pressione Enter para voltar...")
         menu()
 
     elif opcao == "8":
