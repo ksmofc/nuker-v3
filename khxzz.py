@@ -371,7 +371,7 @@ def menu():
     global svr
     clear()  # limpa a tela
 
-    gradiente = Colors.black_to_red
+    gradiente = Colors.red
 
     # Título e menu centralizados e coloridos
     print(Colorate.Vertical(gradiente, ascii))
