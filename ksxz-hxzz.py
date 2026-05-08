@@ -24,8 +24,8 @@ global err
 err=0
 
 def print_message(action,success=True,response_code=None):
-        if success:status=f"{Fore.BLUE}[ ~ ]"
-        else:status=f"{Fore.BLUE}[ ! ]"
+        if success:status=f"{Fore.RED}[ ~ ]"
+        else:status=f"{Fore.RED}[ ! ]"
         if response_code is not None:status+=f" Response Code: {response_code}"
         print(f"{status}     {action}")
 
@@ -68,7 +68,7 @@ def is_valid_guild_id(guild_id):
         headers={'Authorization':f"Bot {tkn}"}
         response=requests.get(f"https://discord.com/api/v9/guilds/{guild_id}",headers=headers)
         return response.status_code==200
-        Write.Print(f"[ + ]     Guild valid.\n",Colors.blue,interval=.005)
+        Write.Print(f"[ + ]     Guild valid.\n",Colors.red,interval=.005)
 
 def get_integer_input(prompt):
         while True:
@@ -76,7 +76,7 @@ def get_integer_input(prompt):
                         user_input=int(input(prompt))
                         return user_input
                 except ValueError:
-                        Write.Print(f"[ + ]     Please enter a valid integer.\n",Colors.blue,interval=.005)
+                        Write.Print(f"[ + ]     Please enter a valid integer.\n",Colors.red,interval=.005)
 
 def send_message_to_channel(bottoken,channel_id,message,amount):
         channel_url=f"https://discord.com/api/channels/{channel_id}/messages"
@@ -99,11 +99,11 @@ def send_messages_to_all_channels(bottoken,guild_id,message,amount,num_threads=5
 def spam():
         global tkn
         global svr
-        message=input(f"{Fore.BLUE}[ + ]     Enter the message to send: {Fore.RESET}")
-        amount=get_integer_input(f"{Fore.BLUE}[ + ]     Enter the number of messages to send: {Fore.RESET}")
+        message=input(f"{Fore.RED}[ + ]     Enter the message to send: {Fore.RESET}")
+        amount=get_integer_input(f"{Fore.RED}[ + ]     Enter the number of messages to send: {Fore.RESET}")
         num_threads=20
         send_messages_to_all_channels(tkn,svr,message,amount,num_threads)
-        input(f"{Fore.BLUE}[ + ]     Complete. Press enter to go back.")
+        input(f"{Fore.RED}[ + ]     Complete. Press enter to go back.")
         menu()
 
 def delete_channel(channel_id,token,result_queue,max_retries=5):
@@ -153,8 +153,8 @@ def create_channel(guild_id,token,channel_name,result_queue):
 def channelcreate():
         global tkn
         global svr
-        channel_name=input(f"{Fore.BLUE}[ + ]     Enter the channel name: ")
-        num_channels=get_integer_input(f"{Fore.BLUE}[ + ]     Enter the number of channels to create: ")
+        channel_name=input(f"{Fore.WHITE}[ + ]     Enter the channel name: ")
+        num_channels=get_integer_input(f"{Fore.RED}[ + ]     Enter the number of channels to create: ")
         num_threads=150
         result_queue=queue.Queue()
         threads=[]
@@ -174,13 +174,13 @@ def create_role(guild_id,token,role_name,role_color,result_queue):
         if response.status_code==200:
                 print_message(f"Role '{role_name}' created successfully.")
         else:
-                print(f"{Fore.BLUE}[ + ]     Error creating role '{role_name}': {response.status_code}")
+                print(f"{Fore.RED}[ + ]     Error creating role '{role_name}': {response.status_code}")
 
 def createroles():
         global tkn
         global svr
-        name=input(f"{Fore.BLUE}[ + ]     Role name: ")
-        num_roles=get_integer_input(f"{Fore.BLUE}[ + ]     Enter the number of roles to create: ")
+        name=input(f"{Fore.RED}[ + ]     Role name: ")
+        num_roles=get_integer_input(f"{Fore.WHITE}[ + ]     Enter the number of roles to create: ")
         num_threads=100
         result_queue=queue.Queue()
         threads=[]
@@ -201,7 +201,7 @@ def delete_role(role_id,guild_id,token,result_queue):
         if response.status_code==204:
                 print_message(f"Role {role_id} deleted successfully.")
         else:
-                print(f"{Fore.BLUE}Error deleting role {role_id}: {response.status_code}")
+                print(f"{Fore.WHITE}Error deleting role {role_id}: {response.status_code}")
 
 def delete_all_roles(token,guild_id,num_threads=100):
         headers={'Authorization':f"Bot {token}"}
